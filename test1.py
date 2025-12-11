@@ -1,0 +1,14 @@
+import re
+import os
+# The input string
+input_string = """Thank you for your input. Based on your response, here is the JSON for the first criteria group:\n\n```json\n{\n  "Automatically match purchase orders (PO) to invoices": "nice_to_have",\n  "Big Data Analytics": "not_necessary",\n  "Automated transfer (and transformation) of financial data between company finance systems": "not_necessary",\n  "Automatically match transactions against a general ledger": "not_necessary",\n  "Automated transfer (and transformation) of industry or company specific data": "not_necessary",\n  "Automatically extract relevant ledger items": "not_necessary",\n  "Automatic creation of close checklists": "not_necessary",\n  "Pre-built connectors": "not_necessary",\n  "Automatically capture remittance details from email, attachments or customer portal": "not_necessary",\n  "Automated financial reporting in a self-service system": "not_necessary",\n  "Automatically links the payment to the appropriate PO/Invoice": "not_necessary",\n  "Predictive Analytics": "not_necessary",\n  "Automatically provide GL Coding for invoices in Real-Time": "not_necessary",\n  "Automatically validate supplier data": "not_necessary",\n  "Automatically upload journal entry posts to general or sub ledger system within ERP solution": "not_necessary",\n  "Automatically extract invoice image data for processing": "not_necessary",\n  "Automated bank reconciliations": "not_necessary",\n  "Automatically maintain audit trail": "not_necessary",\n  "Automated cash application processes": "not_necessary",\n  "General Ledger Automation": "not_necessary",\n  "Automate storage supporting documentation digitally": "not_necessary"\n}\n```\n\nLet's move on to the next criteria group.\n\n**Group 2: Financial Management and Reporting**\nFinancial Analytics, Budgeting and Forecasting for Finance and Accounting Software, Financial Close Management for Finance and Accounting Software, Treasury and Cash Management for Finance and Accounting Software, Accounts Payable for Finance and Accounting Software, Accounts Receivable and Billing for Finance and Accounting Software, Fixed Assets Management for Finance and Accounting Software, General Ledger for Finance and Accounting Software, Governance and Compliance for Finance and Accounting, Reporting, Dashboards, and Data Analysis Tools, Automating cash forecasting and analysis, Automated delivery of bills/invoices and account statements.\n\nCould you please specify the priority for this group or any specific criteria within this group?"""
+
+# Define the regular expression pattern to match the JSON block
+pattern = r"```json\n\{[^}]*\}\n```"
+
+# Replace the JSON block with an empty string
+cleaned_string = re.sub(pattern, '', input_string, flags=re.DOTALL)
+
+print(cleaned_string)
+
+print(os.mkdir('cleaned_output'))
