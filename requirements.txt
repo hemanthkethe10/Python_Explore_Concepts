@@ -30,3 +30,7 @@ aiohttp>=3.9.0
 
 # Type Hints (for older Python versions)
 typing-extensions>=4.0.0
+
+# Cron Scheduling (tick_notifier)
+croniter>=2.0.0
+pytz>=2024.1
