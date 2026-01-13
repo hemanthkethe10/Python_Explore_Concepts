@@ -42,3 +42,38 @@ def longest_substring_sliding_window(s):
     return max_length
 
 print(longest_substring_sliding_window(s))
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+    
+    def __str__(self):
+        """String representation of the linked list starting from this node"""
+        result = []
+        current = self
+        while current:
+            result.append(str(current.val))
+            current = current.next
+        return " -> ".join(result) + " -> None"
+
+# def print_linked_list(head):
+#     """Alternative function to print linked list"""
+#     current = head
+#     values = []
+#     while current:
+#         values.append(str(current.val))
+#         current = current.next
+#     print(" -> ".join(values) + " -> None")
+
+head = ListNode(10)
+head.next = ListNode(20)
+head.next.next = ListNode(30)
+
+# Now this will print the linked list nicely
+print(head)
+
+# # Alternative way using the function
+# print("Using function:")
+# print_linked_list(head)
