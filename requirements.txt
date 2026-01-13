@@ -34,3 +34,5 @@ typing-extensions>=4.0.0
 # Cron Scheduling (tick_notifier)
 croniter>=2.0.0
 pytz>=2024.1
+
+requests>=2.25.1
