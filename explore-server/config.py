@@ -49,6 +49,15 @@ class Config:
     # Slow Operation Configuration
     MAX_SLOW_OPERATION_DELAY: int = int(os.getenv("MAX_SLOW_OPERATION_DELAY", "10"))
     
+    # Cache Configuration
+    CACHE_ENABLED: bool = os.getenv("CACHE_ENABLED", "True").lower() == "true"
+    REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+    CACHE_DEFAULT_TTL: int = int(os.getenv("CACHE_DEFAULT_TTL", "300"))  # 5 minutes
+    CACHE_STATS_TTL: int = int(os.getenv("CACHE_STATS_TTL", "60"))      # 1 minute
+    CACHE_USERS_TTL: int = int(os.getenv("CACHE_USERS_TTL", "180"))     # 3 minutes
+    CACHE_POSTS_TTL: int = int(os.getenv("CACHE_POSTS_TTL", "120"))     # 2 minutes
+    CACHE_RATE_LIMIT_INFO_TTL: int = int(os.getenv("CACHE_RATE_LIMIT_INFO_TTL", "3600"))  # 1 hour
+    
     @classmethod
     def get_rate_limits(cls) -> Dict[str, str]:
         """Get all rate limit configurations"""
@@ -80,6 +89,21 @@ class Config:
         }
     
     @classmethod
+    def get_cache_config(cls) -> Dict[str, Any]:
+        """Get cache configuration"""
+        return {
+            "enabled": cls.CACHE_ENABLED,
+            "redis_url": cls.REDIS_URL if cls.CACHE_ENABLED else None,
+            "default_ttl": cls.CACHE_DEFAULT_TTL,
+            "ttl_settings": {
+                "stats": cls.CACHE_STATS_TTL,
+                "users": cls.CACHE_USERS_TTL,
+                "posts": cls.CACHE_POSTS_TTL,
+                "rate_limit_info": cls.CACHE_RATE_LIMIT_INFO_TTL
+            }
+        }
+    
+    @classmethod
     def print_config(cls):
         """Print current configuration (for debugging)"""
         print("=" * 50)
@@ -95,6 +119,10 @@ class Config:
         print(f"Retry After: {cls.RETRY_AFTER_SECONDS} seconds")
         print(f"CORS Origins: {cls.CORS_ORIGINS}")
         print(f"GraphQL Playground: {cls.GRAPHQL_PLAYGROUND_ENABLED}")
+        print(f"Cache Enabled: {cls.CACHE_ENABLED}")
+        if cls.CACHE_ENABLED:
+            print(f"Redis URL: {cls.REDIS_URL}")
+            print(f"Default Cache TTL: {cls.CACHE_DEFAULT_TTL}s")
         print("=" * 50)
 
 # Create a global config instance
